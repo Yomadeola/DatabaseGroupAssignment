@@ -93,7 +93,7 @@ INSERT INTO book (title, publisher_id, language_id, publication_year, isbn) VALU
 ('Love in the Time of Cholera', 4, 2, 1985, '9780307389732'),
 ('Sense and Sensibility', 5, 1, 1811, '9780141439662');
 
--- Insert book_author relationships
+-- book_author relationships
 INSERT INTO book_author (book_id, author_id) VALUES
 (1, 1),  -- Harry Potter - J.K. Rowling
 (2, 2),  -- The Shining - Stephen King
@@ -206,7 +206,7 @@ CREATE TABLE order_history (
     FOREIGN KEY (status_id) REFERENCES order_status(status_id)
 );
 
--- Insert data into Country table
+-- Country table
 INSERT INTO country (country_name) VALUES
 ('United States'),
 ('United Kingdom'),
@@ -219,7 +219,7 @@ INSERT INTO country (country_name) VALUES
 ('Kenya'),
 ('South Africa');
 
--- Insert data into Address_Status table
+--  Address_Status table
 INSERT INTO address_status (status_name) VALUES
 ('Current'),
 ('Previous'),
@@ -229,7 +229,7 @@ INSERT INTO address_status (status_name) VALUES
 ('Business'),
 ('Home');
 
--- Insert data into Address table
+-- Address table
 INSERT INTO address (street_number, street_name, city, state_province, postal_code, country_id) VALUES
 ('123', 'Main Street', 'New York', 'NY', '10001', 1),
 ('456', 'Oxford Street', 'London', 'England', 'W1D 1BS', 2),
@@ -244,7 +244,7 @@ INSERT INTO address (street_number, street_name, city, state_province, postal_co
 ('888', 'Technology Park', 'San Francisco', 'CA', '94105', 1),
 ('999', 'Queen Street', 'Toronto', 'Ontario', 'M5H 2M9', 3);
 
--- Insert data into Customer table
+-- Customer table
 INSERT INTO customer (first_name, last_name, email, phone, registration_date) VALUES
 ('John', 'Smith', 'john.smith@email.com', '555-123-4567', '2023-01-15 10:30:00'),
 ('Emma', 'Johnson', 'emma.johnson@email.com', '555-234-5678', '2023-02-20 14:45:00'),
@@ -259,23 +259,23 @@ INSERT INTO customer (first_name, last_name, email, phone, registration_date) VA
 ('Benjamin', 'Taylor', 'benjamin.taylor@email.com', '555-123-7890', '2023-07-10 09:45:00'),
 ('Mia', 'Thomas', 'mia.thomas@email.com', '555-234-8901', '2023-07-25 14:30:00');
 
--- Insert data into Customer_Address table
+-- Customer_Address table
 INSERT INTO customer_address (customer_id, address_id, status_id) VALUES
-(1, 1, 1), -- John Smith's current address
-(2, 2, 1), -- Emma Johnson's current address
-(3, 3, 1), -- Michael Williams' current address
-(4, 4, 1), -- Sophia Brown's current address
-(5, 5, 1), -- William Jones' current address
-(6, 6, 1), -- Olivia Garcia's current address
-(7, 7, 1), -- James Miller's current address
-(8, 8, 1), -- Ava Davis's current address
-(9, 9, 1), -- Alexander Rodriguez's current address
-(10, 10, 1), -- Isabella Wilson's current address
-(11, 11, 1), -- Benjamin Taylor's current address
-(11, 12, 3), -- Benjamin Taylor's billing address
-(12, 12, 1); -- Mia Thomas's current address
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(11, 11, 1),
+(11, 12, 3),
+(12, 12, 1);
 
--- Insert data into Order_Status table
+-- Order_Status table
 INSERT INTO order_status (status_name) VALUES
 ('Pending'),
 ('Processing'),
@@ -285,7 +285,7 @@ INSERT INTO order_status (status_name) VALUES
 ('Returned'),
 ('On Hold');
 
--- Insert data into Shipping_Method table
+--  Shipping_Method table
 INSERT INTO shipping_method (method_name, cost) VALUES
 ('Standard Shipping', 5.99),
 ('Express Shipping', 12.99),
@@ -297,12 +297,6 @@ INSERT INTO shipping_method (method_name, cost) VALUES
 -- The following inserts assume that book_language, publisher, book, and author tables
 -- have already been populated with data
 
--- Let's assume we have these book IDs available for the order lines
--- book_id 1: "The Great Gatsby"
--- book_id 2: "To Kill a Mockingbird"
--- book_id 3: "1984"
--- book_id 4: "Pride and Prejudice"
--- book_id 5: "The Hobbit"
 
 -- Insert data into Cust_Order table
 INSERT INTO cust_order (customer_id, order_date, shipping_method_id, address_id, order_status_id, total_amount) VALUES
