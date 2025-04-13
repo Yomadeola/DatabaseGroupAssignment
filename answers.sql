@@ -396,3 +396,11 @@ GRANT SELECT, INSERT, UPDATE ON bookstore.book_language TO 'inventory_manager'@'
 
 -- Apply privileges
 FLUSH PRIVILEGES;
+
+USE bookstore;
+-- Get all books by a specific author
+SELECT b.title, b.isbn, b.publication_year
+FROM book b
+JOIN book_author ba ON b.book_id = ba.book_id
+JOIN author a ON ba.author_id = a.author_id
+WHERE a.name = 'J.K. Rowling';
