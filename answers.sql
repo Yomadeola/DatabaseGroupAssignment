@@ -370,3 +370,37 @@ INSERT INTO order_history (order_id, status_id, status_date, notes) VALUES
 (10, 3, '2023-09-26 10:45:00', 'Order shipped'),
 (10, 4, '2023-09-28 13:20:00', 'Order delivered');
 
+
+-- Create user groups
+-- Admin group with full access
+CREATE USER 'bookstore_admin'@'localhost' IDENTIFIED BY 'strong_admin_password';
+GRANT ALL PRIVILEGES ON bookstore.* TO 'bookstore_admin'@'localhost';
+
+-- Sales staff with read/write access to customer and order tables
+CREATE USER 'sales_staff'@'localhost' IDENTIFIED BY 'sales_password';
+GRANT SELECT, INSERT, UPDATE ON bookstore.customer TO 'sales_staff'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.customer_address TO 'sales_staff'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.cust_order TO 'sales_staff'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.order_line TO 'sales_staff'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.order_history TO 'sales_staff'@'localhost';
+GRANT SELECT ON bookstore.book TO 'sales_staff'@'localhost';
+GRANT SELECT ON bookstore.author TO 'sales_staff'@'localhost';
+
+-- Inventory manager with access to book-related tables
+CREATE USER 'inventory_manager'@'localhost' IDENTIFIED BY 'inventory_password';
+GRANT SELECT, INSERT, UPDATE ON bookstore.book TO 'inventory_manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.book_author TO 'inventory_manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.author TO 'inventory_manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.publisher TO 'inventory_manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore.book_language TO 'inventory_manager'@'localhost';
+
+-- Apply privileges
+FLUSH PRIVILEGES;
+
+USE bookstore;
+-- Get all books by a specific author
+SELECT b.title, b.isbn, b.publication_year
+FROM book b
+JOIN book_author ba ON b.book_id = ba.book_id
+JOIN author a ON ba.author_id = a.author_id
+WHERE a.name = 'J.K. Rowling';
